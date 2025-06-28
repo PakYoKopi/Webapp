@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPMF Framework Tracker - Pelacak Kebiasaan, Produktivitas, Mastery & Fokus</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <div class="nav-brand">
+                <h1>HPMF Tracker</h1>
+                <span>Framework Siklus Menuju Mastery</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+                <button class="nav-btn" data-section="daily-checkin">Check-in Harian</button>
+                <button class="nav-btn" data-section="pillars">Pilar HPMF</button>
+                <button class="nav-btn" data-section="weekly-review">Review Mingguan</button>
+                <button class="nav-btn" data-section="mitigasi">Mitigasi Risiko</button>
+            </div>
+        </nav>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <div class="dashboard-header">
+                    <div class="phase-indicator">
+                        <h2>Fase Saat Ini: <span id="current-phase">Stabilisasi</span></h2>
+                        <p>Minggu ke-<span id="current-week">5</span> | <span id="phase-description">Membangun ritme dan konsistensi</span></p>
+                    </div>
+                    <div class="cycle-diagram">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1750415355/pplx_code_interpreter/06a7328a_slizuh.jpg" alt="Siklus HPMF" class="cycle-img">
+                    </div>
+                </div>
+
+                <div class="progress-grid">
+                    <div class="progress-card habit-card">
+                        <div class="card-header">
+                            <h3>Habit</h3>
+                            <div class="progress-circle">
+                                <svg width="60" height="60">
+                                    <circle cx="30" cy="30" r="25" class="progress-bg"></circle>
+                                    <circle cx="30" cy="30" r="25" class="progress-fill habit-progress" data-progress="75"></circle>
+                                </svg>
+                                <span class="progress-text">75%</span>
+                            </div>
+                        </div>
+                        <div class="streak-counter">
+                            <span class="streak-number">28</span>
+                            <span class="streak-label">hari streak</span>
+                        </div>
+                        <div class="habit-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Energi</span>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-card productivity-card">
+                        <div class="card-header">
+                            <h3>Productivity</h3>
+                            <div class="progress-circle">
+                                <svg width="60" height="60">
+                                    <circle cx="30" cy="30" r="25" class="progress-bg"></circle>
+                                    <circle cx="30" cy="30" r="25" class="progress-fill productivity-progress" data-progress="68"></circle>
+                                </svg>
+                                <span class="progress-text">68%</span>
+                            </div>
+                        </div>
+                        <div class="productivity-stats">
+                            <div class="stat">
+                                <span class="stat-value">4.5h</span>
+                                <span class="stat-label">Deep Work</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Tasks Done</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-card mastery-card">
+                        <div class="card-header">
+                            <h3>Mastery</h3>
+                            <div class="progress-circle">
+                                <svg width="60" height="60">
+                                    <circle cx="30" cy="30" r="25" class="progress-bg"></circle>
+                                    <circle cx="30" cy="30" r="25" class="progress-fill mastery-progress" data-progress="72"></circle>
+                                </svg>
+                                <span class="progress-text">72%</span>
+                            </div>
+                        </div>
+                        <div class="mastery-stats">
+                            <div class="stat">
+                                <span class="stat-value">2.5h</span>
+                                <span class="stat-label">Practice</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">3</span>
+                                <span class="stat-label">Feedback</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-card focus-card">
+                        <div class="card-header">
+                            <h3>Focus</h3>
+                            <div class="progress-circle">
+                                <svg width="60" height="60">
+                                    <circle cx="30" cy="30" r="25" class="progress-bg"></circle>
+                                    <circle cx="30" cy="30" r="25" class="progress-fill focus-progress" data-progress="80"></circle>
+                                </svg>
+                                <span class="progress-text">80%</span>
+                            </div>
+                        </div>
+                        <div class="focus-stats">
+                            <div class="stat">
+                                <span class="stat-value">8/10</span>
+                                <span class="stat-label">Clarity</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">45min</span>
+                                <span class="stat-label">Deep Zone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-section">
+                    <h3>Timeline Implementasi</h3>
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1750415634/pplx_code_interpreter/a2bdfc62_pkluwl.jpg" alt="Timeline HPMF" class="timeline-img">
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Progress Mingguan</h3>
+                        <canvas id="weeklyChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Perbandingan Pilar</h3>
+                        <canvas id="pillarChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Check-in Section -->
+        <section id="daily-checkin" class="section">
+            <div class="container">
+                <h2>Check-in Harian</h2>
+                <div class="checkin-form">
+                    <div class="checkin-grid">
+                        <div class="checkin-card">
+                            <h3>Habit</h3>
+                            <div class="form-group">
+                                <label class="form-label">Habit hari ini (berapa yang selesai?)</label>
+                                <input type="number" class="form-control" id="habit-count" min="0" max="10" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tingkat energi (1-10)</label>
+                                <input type="range" class="range-input" id="energy-level" min="1" max="10" value="7">
+                                <span class="range-value">7</span>
+                            </div>
+                        </div>
+
+                        <div class="checkin-card">
+                            <h3>Productivity</h3>
+                            <div class="form-group">
+                                <label class="form-label">Jam Deep Work</label>
+                                <input type="number" class="form-control" id="deep-work-hours" min="0" max="12" step="0.5" value="4.5">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Pomodoro selesai</label>
+                                <input type="number" class="form-control" id="pomodoro-count" min="0" max="20" value="6">
+                            </div>
+                        </div>
+
+                        <div class="checkin-card">
+                            <h3>Mastery</h3>
+                            <div class="form-group">
+                                <label class="form-label">Jam Practice</label>
+                                <input type="number" class="form-control" id="practice-hours" min="0" max="8" step="0.5" value="2">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Feedback diterima</label>
+                                <input type="number" class="form-control" id="feedback-count" min="0" max="10" value="1">
+                            </div>
+                        </div>
+
+                        <div class="checkin-card">
+                            <h3>Focus</h3>
+                            <div class="form-group">
+                                <label class="form-label">Kejelasan prioritas (1-10)</label>
+                                <input type="range" class="range-input" id="priority-clarity" min="1" max="10" value="8">
+                                <span class="range-value">8</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Waktu masuk deep zone (menit)</label>
+                                <input type="number" class="form-control" id="deep-zone-time" min="0" max="180" value="45">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn--primary btn--lg" id="submit-checkin">Simpan Check-in Hari Ini</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pillars Section -->
+        <section id="pillars" class="section">
+            <div class="container">
+                <h2>Pilar HPMF Detail</h2>
+                <div class="pillar-tabs">
+                    <button class="pillar-tab active" data-pillar="habit">Habit</button>
+                    <button class="pillar-tab" data-pillar="productivity">Productivity</button>
+                    <button class="pillar-tab" data-pillar="mastery">Mastery</button>
+                    <button class="pillar-tab" data-pillar="focus">Focus</button>
+                </div>
+
+                <div id="habit-pillar" class="pillar-content active">
+                    <div class="pillar-theory">
+                        <h3>Teori Kunci: Atomic Habits (James Clear)</h3>
+                        <div class="habit-loop">
+                            <div class="loop-item">
+                                <span class="loop-number">1</span>
+                                <span class="loop-label">Cue</span>
+                            </div>
+                            <div class="loop-arrow">→</div>
+                            <div class="loop-item">
+                                <span class="loop-number">2</span>
+                                <span class="loop-label">Craving</span>
+                            </div>
+                            <div class="loop-arrow">→</div>
+                            <div class="loop-item">
+                                <span class="loop-number">3</span>
+                                <span class="loop-label">Response</span>
+                            </div>
+                            <div class="loop-arrow">→</div>
+                            <div class="loop-item">
+                                <span class="loop-number">4</span>
+                                <span class="loop-label">Reward</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="habit-tracker">
+                        <h4>Habit Tracking</h4>
+                        <div class="habit-list">
+                            <div class="habit-item">
+                                <span class="habit-name">Membaca 20 menit</span>
+                                <div class="habit-streak">28 hari</div>
+                                <div class="habit-status completed">✓</div>
+                            </div>
+                            <div class="habit-item">
+                                <span class="habit-name">Olahraga pagi</span>
+                                <div class="habit-streak">15 hari</div>
+                                <div class="habit-status completed">✓</div>
+                            </div>
+                            <div class="habit-item">
+                                <span class="habit-name">Meditasi 10 menit</span>
+                                <div class="habit-streak">7 hari</div>
+                                <div class="habit-status pending">○</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="productivity-pillar" class="pillar-content">
+                    <div class="pillar-theory">
+                        <h3>Teori Kunci: Deep Work (Cal Newport)</h3>
+                        <div class="productivity-tools">
+                            <div class="tool-item">Time Blocking</div>
+                            <div class="tool-item">Eisenhower Matrix</div>
+                            <div class="tool-item">Pomodoro</div>
+                            <div class="tool-item">Peak Hours</div>
+                        </div>
+                    </div>
+                    <div class="productivity-metrics">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <h4>Deep Work Today</h4>
+                                <div class="metric-value">4.5 jam</div>
+                                <div class="metric-target">Target: 6 jam</div>
+                            </div>
+                            <div class="metric-card">
+                                <h4>Tasks Completed</h4>
+                                <div class="metric-value">12</div>
+                                <div class="metric-target">Target: 15</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mastery-pillar" class="pillar-content">
+                    <div class="pillar-theory">
+                        <h3>Teori Kunci: Deliberate Practice (Anders Ericsson)</h3>
+                        <div class="mastery-elements">
+                            <div class="element-item">Deliberate Practice</div>
+                            <div class="element-item">Feedback Loops</div>
+                            <div class="element-item">Stretch Zone</div>
+                        </div>
+                    </div>
+                    <div class="skill-progress">
+                        <h4>Progress Keahlian</h4>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript Programming</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">UI/UX Design</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 55%"></div>
+                            </div>
+                            <span class="skill-level">55%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="focus-pillar" class="pillar-content">
+                    <div class="pillar-theory">
+                        <h3>Teori Kunci: Flow State & Mindfulness</h3>
+                        <div class="focus-elements">
+                            <div class="element-item">Flow State</div>
+                            <div class="element-item">Mindfulness</div>
+                            <div class="element-item">Digital Minimalism</div>
+                            <div class="element-item">Dopamine Regulation</div>
+                        </div>
+                    </div>
+                    <div class="focus-metrics">
+                        <div class="focus-item">
+                            <span class="focus-label">Resistensi Distraksi</span>
+                            <div class="focus-rating">
+                                <span class="rating active">★</span>
+                                <span class="rating active">★</span>
+                                <span class="rating active">★</span>
+                                <span class="rating active">★</span>
+                                <span class="rating">★</span>
+                            </div>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-label">Waktu masuk Deep Zone</span>
+                            <span class="focus-value">45 menit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weekly Review Section -->
+        <section id="weekly-review" class="section">
+            <div class="container">
+                <h2>Review Mingguan</h2>
+                <div class="review-form">
+                    <div class="review-grid">
+                        <div class="review-card">
+                            <h3>Rating Minggu Ini</h3>
+                            <div class="rating-group">
+                                <label>Habit (1-10)</label>
+                                <input type="range" class="range-input" min="1" max="10" value="8">
+                                <span class="range-value">8</span>
+                            </div>
+                            <div class="rating-group">
+                                <label>Productivity (1-10)</label>
+                                <input type="range" class="range-input" min="1" max="10" value="7">
+                                <span class="range-value">7</span>
+                            </div>
+                            <div class="rating-group">
+                                <label>Mastery (1-10)</label>
+                                <input type="range" class="range-input" min="1" max="10" value="7">
+                                <span class="range-value">7</span>
+                            </div>
+                            <div class="rating-group">
+                                <label>Focus (1-10)</label>
+                                <input type="range" class="range-input" min="1" max="10" value="8">
+                                <span class="range-value">8</span>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <h3>Refleksi</h3>
+                            <div class="form-group">
+                                <label class="form-label">Apa yang berjalan baik minggu ini?</label>
+                                <textarea class="form-control" rows="3" placeholder="Tuliskan pencapaian dan hal positif..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Apa yang perlu diperbaiki?</label>
+                                <textarea class="form-control" rows="3" placeholder="Identifikasi area untuk perbaikan..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Target minggu depan</label>
+                                <textarea class="form-control" rows="2" placeholder="Set target dan fokus untuk minggu depan..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn--primary btn--lg">Simpan Review Mingguan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mitigasi Risiko Section -->
+        <section id="mitigasi" class="section">
+            <div class="container">
+                <h2>Mitigasi Risiko Konsistensi</h2>
+                <div class="kjrn-pyramid">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1750415463/pplx_code_interpreter/62144fb2_lq3vhl.jpg" alt="Piramida KJRN" class="pyramid-img">
+                </div>
+                
+                <div class="kjrn-grid">
+                    <div class="kjrn-card kecil-card">
+                        <div class="kjrn-header">
+                            <h3>Kecil</h3>
+                            <span class="kjrn-subtitle">Minimum Viable Action</span>
+                        </div>
+                        <div class="kjrn-content">
+                            <p>Fokus ke aksi minimum yang bisa dilakukan, bukan goal yang bombastis.</p>
+                            <div class="kjrn-tracker">
+                                <label>MVP Actions hari ini:</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span>Baca 1 halaman buku</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span>Push-up 5 kali</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span>Tulis 50 kata</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kjrn-card jelas-card">
+                        <div class="kjrn-header">
+                            <h3>Jelas</h3>
+                            <span class="kjrn-subtitle">Ritual, bukan sekadar niat</span>
+                        </div>
+                        <div class="kjrn-content">
+                            <p>Jadikan habit memiliki bentuk yang jelas menggunakan habit loop.</p>
+                            <div class="ritual-example">
+                                <div class="ritual-item">
+                                    <strong>Setelah:</strong> Bangun tidur dan minum air
+                                </div>
+                                <div class="ritual-arrow">↓</div>
+                                <div class="ritual-item">
+                                    <strong>Saya akan:</strong> Membaca 10 menit
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kjrn-card rutin-card">
+                        <div class="kjrn-header">
+                            <h3>Rutin</h3>
+                            <span class="kjrn-subtitle">Fokus ke ritme, bukan motivasi</span>
+                        </div>
+                        <div class="kjrn-content">
+                            <p>Bangun ritme yang konsisten dengan trigger waktu yang jelas.</p>
+                            <div class="schedule-tracker">
+                                <div class="schedule-item">
+                                    <span class="time">06:00</span>
+                                    <span class="activity">Morning Routine</span>
+                                    <span class="status completed">✓</span>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">09:00</span>
+                                    <span class="activity">Deep Work Block 1</span>
+                                    <span class="status completed">✓</span>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">20:00</span>
+                                    <span class="activity">Evening Review</span>
+                                    <span class="status pending">○</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kjrn-card nyambung-card">
+                        <div class="kjrn-header">
+                            <h3>Nyambung</h3>
+                            <span class="kjrn-subtitle">Koneksi emosional yang kuat</span>
+                        </div>
+                        <div class="kjrn-content">
+                            <p>Bangun koneksi emosional mengapa habit ini penting dan berikan reward.</p>
+                            <div class="why-tracker">
+                                <div class="why-item">
+                                    <strong>Mengapa membaca penting:</strong>
+                                    <p>Karena saya ingin terus berkembang dan memiliki wawasan yang luas untuk karir saya.</p>
+                                </div>
+                                <div class="reward-system">
+                                    <strong>Reward System:</strong>
+                                    <div class="reward-item">7 hari streak → Film favorit</div>
+                                    <div class="reward-item">30 hari streak → Beli buku baru</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
